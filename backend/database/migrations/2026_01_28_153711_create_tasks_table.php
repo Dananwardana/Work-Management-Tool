@@ -15,12 +15,14 @@ return new class extends Migration
             $table->id();
             $table->foreignId('project_id')->constrained('projects');
             $table->foreignId('assigned_to')->constrained('users');
+            $table->foreignId('created_by')->constrained('users');
 
             $table->string('judul_task');
             $table->text('deskripsi')->nullable();
             $table->enum('status', ['to_do', 'in_progress', 'done'])->default('to_do');
             $table->date('start_date')->nullable();
             $table->date('due_date')->nullable();
+            $table->enum('priority', ['low', 'medium', 'high']);
 
             $table->timestamps();
             $table->softDeletes();

@@ -13,16 +13,12 @@ class Project extends Model
         'nama_project',
         'deskripsi',
         'status',
-        'created_by',
+        'start_date',
+        'end_date',
     ];
 
     public function tasks()
     {
         return $this->hasMany(Task::class);
-    }
-
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'created_by');
     }
 }

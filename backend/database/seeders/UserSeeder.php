@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         DB::table('users')->insert([
+        [
             'name' => 'Test Admin',
             'email' => 'testadmin@example.com',
             'email_verified_at' => now(),
@@ -45,6 +46,7 @@ class UserSeeder extends Seeder
             'role' => UserRole::MEMBER,
             'created_at' => now(),
             'updated_at' => now(),
+        ]
         ]);
     }
 }

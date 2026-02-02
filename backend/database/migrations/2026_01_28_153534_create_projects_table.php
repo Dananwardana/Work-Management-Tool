@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('nama_project');
             $table->text('deskripsi')->nullable();
             $table->enum('status', ['to_do', 'in_progress', 'done'])->default('to_do');
-            $table->foreignId('created_by')->constrained('users');
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
