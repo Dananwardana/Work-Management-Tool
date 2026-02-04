@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('project_id')->constrained('projects');
             $table->foreignId('assigned_to')->constrained('users');
-
             $table->string('judul_task');
             $table->text('deskripsi')->nullable();
             $table->enum('status', ['to_do', 'in_progress', 'done'])->default('to_do');
