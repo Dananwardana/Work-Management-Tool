@@ -18,7 +18,7 @@ class ProjectSeeder extends Seeder
 
         DB::table('projects')->insertOrIgnore([
             'nama_project' => 'Example project',
-            'PIC' => $UserIds->random(),
+            'PIC' => 2,
             'start_date'=> now(),
             'end_date' => Carbon::now()->addDays(30)->toDateString(),
         ]);
