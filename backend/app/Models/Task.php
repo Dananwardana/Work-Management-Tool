@@ -10,13 +10,15 @@ class Task extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'title',
-        'description',
+        'judul_task',
+        'deskripsi',
         'status',
         'project_id',
         'assigned_to',
         'start_date',
         'due_date',
+        'priority',
+        'created_by',
     ];
 
     public function project()
@@ -26,11 +28,16 @@ class Task extends Model
 
     public function user()
     {
-        return $this->belongsTo(user::class, 'assigned_to');
+        return $this->belongsTo(User::class, 'assigned_to');
     }
 
     public function notes()
     {
         return $this->hasMany(TaskNote::class);
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

@@ -1,7 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use \App\Http\Controllers\AuthController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Route Auth
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout']);
+Route::middleware('auth:sanctum')->get('/user', [AuthController::class, 'user']);

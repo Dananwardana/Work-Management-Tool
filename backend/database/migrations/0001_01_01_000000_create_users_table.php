@@ -1,8 +1,10 @@
 <?php
 
+use App\Enum\UserRole;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+
 
 return new class extends Migration
 {
@@ -17,7 +19,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['admin', 'pm', 'member']);
+            $table->enum('role', [
+                UserRole::ADMIN->value,
+                UserRole::PM->value,
+                UserRole::MEMBER->value,
+            ]);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();
