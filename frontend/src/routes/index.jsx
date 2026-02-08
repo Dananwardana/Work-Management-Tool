@@ -1,32 +1,42 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import Login from "@/pages/Login";
-import MainLayout from "@/components/layouts/MainLayout";
+import DashboardLayout from "@/components/layouts/DashboardLayout";
+import Dashboard from "@/pages/Dashboard";
 
 export const router = createBrowserRouter([
-  {
-    path: "/login",
-    element: <Login />, // Halaman login berdiri sendiri (Tanpa Sidebar)
-  },
-  {
-    path: "/",
-    element: <MainLayout />, // Semua di bawah ini akan punya Sidebar & Navbar
-    children: [
-      {
-        index: true, // Kalau user buka "/", otomatis ke
-        element: <Navigate to="/login" replace />,
-      },
-      {
-        path: "dashboard",
-        element: <div className="text-2xl font-bold">Halo, Ini Dashboard Performa</div>,
-      },
-      {
-        path: "projects",
-        element: <div className="text-2xl font-bold">Halo, Ini Daftar Project</div>,
-      },
-    ],
-  },
-  {
-    path: "*", // Jika ngetik asal di URL
-    element: <div className="flex h-screen items-center justify-center font-bold">404 - Nyasar Bos!</div>,
-  },
+    {
+        path: "/login",
+        element: <Login />,
+    },
+    {
+        path: "/",
+        element: <DashboardLayout />,
+        children: [
+            {
+                index: true,
+                // Kalau user buka "/", otomatis ke(), Tapi Saat dev, ubah redirect ke dashboard biar gak capek login terus
+                element: <Navigate to="/dashboard" replace />,
+            },
+            {
+                path: "dashboard",
+                element: <Dashboard />,
+            },
+            {
+                path: "projects",
+                element: (
+                    <div className="text-2xl font-bold p-10">
+                        Halo, Ini Daftar Project
+                    </div>
+                ),
+            },
+        ],
+    },
+    {
+        path: "*",
+        element: (
+            <div className="flex h-screen items-center justify-center font-bold">
+                404 - Nyasar Bos!
+            </div>
+        ),
+    },
 ]);
