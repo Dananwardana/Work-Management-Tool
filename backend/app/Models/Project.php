@@ -15,10 +15,16 @@ class Project extends Model
         'status',
         'start_date',
         'end_date',
+        'created_by',
     ];
 
     public function tasks()
     {
         return $this->hasMany(Task::class);
+    }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

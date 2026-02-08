@@ -18,6 +18,9 @@ return new class extends Migration
             $table->enum('status', ['to_do', 'in_progress', 'done'])->default('to_do');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+
+            $table->foreignId('created_by')->constrained('users');
+
             $table->timestamps();
             $table->softDeletes();
         });
