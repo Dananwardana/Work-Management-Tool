@@ -8,6 +8,7 @@ use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
@@ -18,7 +19,11 @@ class UserController extends Controller
     {
         $users = User::all();
 
-        return UserResource::collection($users);
+        return response()->json([
+            'success' => true,
+            'data' => UserResource::collection($users)
+        ]);
+        //return UserResource::collection($users);
     }
 
     /**
@@ -27,17 +32,17 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $fields = $request->validate([
-            'name'=> 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
+            'name'=> ['required','string','max:255'],
+            'email' => ['required','email','max:255', 'unique:users'],
+            'password' => ['required','string','min:8','confirmed'],
             'role' => ['required', Rule::enum(UserRole::class)],
         ]);
 
         $resource = User::create($fields);
 
         return response()->json([
-            'succes' => true,
-            'data' => new UserResource($resource),
+            'success' => true,
+            'data' => new UserResource($resource)
         ]);
     }
 
@@ -47,7 +52,7 @@ class UserController extends Controller
     public function show(User $user)
     {
         return response()->json([
-            'succes' => true,
+            'success' => true,
             'data' => new UserResource($user)
         ]);
     }
@@ -58,17 +63,17 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $fields = $request->validate([
-            'name'=> 'sometimes|required|string|max:255',
-            'email' => 'sometimes|required|email|max:255|unique:users',
-            'password' => 'sometimes|required|string|min:8|confirmed',
-            'role' => ['sometimes|required', Rule::enum(UserRole::class)],
+            'name'=> ['sometimes','required','string','max:255'],
+            'email' => ['sometimes','required','email','max:255',Rule::unique('users')->ignore($user->id)],
+            'password' => ['sometimes','required','string','min:8','confirmed'],
+            'role' => ['sometimes','required', Rule::enum(UserRole::class)],
         ]);
 
         $user->update($fields);
 
         return response()->json([
-            'succes' => true,
-            'data' => new UserResource($user),
+            'success' => true,
+            'data' => new UserResource($user)
         ]);
     }
 
@@ -77,6 +82,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+ 
         $user->loadCount(['projects', 'tasks', 'taskNotes']);
 
         if($user->projects_count || $user->tasks_count || $user->task_notes_count){
