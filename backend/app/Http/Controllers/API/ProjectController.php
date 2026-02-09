@@ -47,6 +47,8 @@ class ProjectController extends Controller
             'PIC' => ['required','exists:users,id'],
         ]);
 
+        $fields['created_by'] = $request->user()->id; 
+
         $resource = Project::create($fields);
 
         return response()->json([
