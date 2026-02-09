@@ -19,6 +19,7 @@ return new class extends Migration
             $table->foreignId('PIC')->constrained('users');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->foreignId('created_by')->constrained('users');
             $table->timestamps();
             $table->softDeletes();
         });

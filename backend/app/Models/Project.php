@@ -17,6 +17,7 @@ class Project extends Model
         'PIC',
         'start_date',
         'end_date',
+        'created_by',
     ];
     public function user()
     {
@@ -37,4 +38,9 @@ class Project extends Model
         return $query->where('PIC', $user->id);
     }
 }
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
 }
