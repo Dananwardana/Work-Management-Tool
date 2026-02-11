@@ -1,6 +1,6 @@
 import React from "react";
-import LoginBanner from "@/components/fragments/auth/LoginBanner";
-import LoginForm from "@/components/fragments/auth/LoginForm";
+import LoginBanner from "@/components/fragments/loginPage/LoginBanner";
+import LoginForm from "@/components/fragments/loginPage/LoginForm";
 
 export default function Login() {
   return (

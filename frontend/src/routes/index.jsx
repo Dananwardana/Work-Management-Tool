@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import Login from "@/pages/Login";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import Dashboard from "@/pages/Dashboard";
+import Project from "@/pages/Project";
 
 export const router = createBrowserRouter([
     {
@@ -23,11 +24,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: "projects",
-                element: (
-                    <div className="text-2xl font-bold p-10">
-                        Halo, Ini Daftar Project
-                    </div>
-                ),
+                element: <Project />,
             },
         ],
     },

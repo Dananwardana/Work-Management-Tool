@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Plus, MoreHorizontal } from "lucide-react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { Card, CardContent } from "@/components/ui/card";
-import { BaseButton } from "@/components/ui/BaseButton";
+import { BaseButton } from "@/components/fragments/global/BaseButton";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 // 1. DATA PROJECT STATUS (3 Segmen)

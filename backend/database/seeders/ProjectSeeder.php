@@ -36,6 +36,7 @@ class ProjectSeeder extends Seeder
             'start_date' => now()->subDays(5),
             'end_date' => now()->addDays(20),
             'PIC' => 2,
-            'created_by' => $pm?->id ?? $admi
+            'created_by' => $pm?->id ?? $admin?->id,
+        ]);
     }
 }
