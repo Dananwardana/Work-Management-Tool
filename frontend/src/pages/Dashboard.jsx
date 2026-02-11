@@ -22,7 +22,7 @@ const Dashboard = () => {
                     <StatsGrid />
 
                     {/* 2. Mid Row: Task & Calendar */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div className="grid grid-cols-6 lg:grid-cols-2 gap-6">
                         <TaskSection />
 
                         {/* Component Calendar yang Baru */}

@@ -2,6 +2,9 @@ import { createBrowserRouter, Navigate } from "react-router-dom";
 import Login from "@/pages/Login";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import Dashboard from "@/pages/Dashboard";
+import Users from "@/pages/Users";
+import Tasks from "@/pages/Tasks";
+
 
 export const router = createBrowserRouter([
     {
@@ -28,6 +31,14 @@ export const router = createBrowserRouter([
                         Halo, Ini Daftar Project
                     </div>
                 ),
+            },
+            {
+                path: "users",
+                element: <Users />,
+            },
+            {
+                path: "tasks",
+                element: <Tasks />,
             },
         ],
     },
