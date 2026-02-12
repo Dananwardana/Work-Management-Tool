@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
+use App\Models\Project;
+use App\Models\User;
 
 class ProjectSeeder extends Seeder
 {
@@ -14,13 +16,27 @@ class ProjectSeeder extends Seeder
      */
     public function run(): void
     {
-        $UserIds = DB::table('users')->pluck('id');
+        $admin = User::where('role', 'admin')->first();
+        $pm = User::where('role', 'pm')->first();
 
-        DB::table('projects')->insertOrIgnore([
-            'nama_project' => 'Example project',
+        Project::create([
+            'nama_project' => 'Sistem Manajemen Workflow',
+            'deskripsi' => 'Project internal untuk manajemen task',
+            'status' => 'to_do',
+            'start_date' => now(),
+            'end_date' => now()->addDays(30),
             'PIC' => 2,
-            'start_date'=> now(),
-            'end_date' => Carbon::now()->addDays(30)->toDateString(),
+            'created_by' => $admin?->id ?? $pm?->id,
+        ]);
+
+        Project::create([
+            'nama_project' => 'Dashboard Kinerja',
+            'deskripsi' => 'Monitoring performa user',
+            'status' => 'in_progress',
+            'start_date' => now()->subDays(5),
+            'end_date' => now()->addDays(20),
+            'PIC' => 2,
+            'created_by' => $pm?->id ?? $admin?->id,
         ]);
     }
 }

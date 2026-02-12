@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@/components/ui/button";
+import { BaseButton } from "@/components/fragments/global/BaseButton";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -115,13 +115,14 @@ export default function LoginForm() {
                     </div>
 
                     {/* Button */}
-                    <Button
+                    <BaseButton
                         type="submit"
-                        className="w-full h-12 text-sm font-bold bg-brand-components/90 hover:bg-brand-components text-white shadow-lg rounded-2xl mt-4 tracking-widest uppercase transition-all hover:-translate-y-0.5 active:scale-[0.98]"
-                        disabled={isLoading}
+                        variant="primary"
+                        isLoading={isLoading}
+                        className="w-full h-12 mt-4 text-sm uppercase tracking-widest shadow-brand-components/30"
                     >
-                        {isLoading ? "Loading..." : "LOGIN"}
-                    </Button>
+                        LOGIN
+                    </BaseButton>
                 </form>
             </CardContent>
         </Card>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Enum\UserRole;
 
 class Project extends Model
 {
@@ -16,6 +17,7 @@ class Project extends Model
         'PIC',
         'start_date',
         'end_date',
+        'created_by',
     ];
     public function user()
     {
@@ -24,5 +26,21 @@ class Project extends Model
     public function tasks()
     {
         return $this->hasMany(Task::class);
+    }
+    public function scopeVisibleTo($query, User $user)
+    {
+    // ADMIN lihat semua
+    if ($user->role === UserRole::ADMIN) {
+        return $query;
+    }
+     // PM hanya lihat project assigned
+    if ($user->role === UserRole::PM) {
+        return $query->where('PIC', $user->id);
+    }
+}
+
+    public function creator()
+    {
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

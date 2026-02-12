@@ -29,7 +29,13 @@ class ProjectPolicy
      */
     public function view(User $user, Project $project): bool
     {
-        return $user->role === UserRole::PM ? true : false ;
+        if ($user->role !== UserRole::PM) {
+        return false;
+        }
+
+        return $project->user()
+            ->where('users.id', $user->id)
+            ->exists();
     }
 
     /**
