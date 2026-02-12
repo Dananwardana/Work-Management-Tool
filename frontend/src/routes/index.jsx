@@ -3,6 +3,9 @@ import Login from "@/pages/Login";
 import DashboardLayout from "@/components/layouts/DashboardLayout";
 import Dashboard from "@/pages/Dashboard";
 import Project from "@/pages/Project";
+import Users from "@/pages/Users";
+import Tasks from "@/pages/Tasks";
+
 
 export const router = createBrowserRouter([
     {
@@ -25,6 +28,14 @@ export const router = createBrowserRouter([
             {
                 path: "projects",
                 element: <Project />,
+            },
+            {
+                path: "users",
+                element: <Users />,
+            },
+            {
+                path: "tasks",
+                element: <Tasks />,
             },
         ],
     },
